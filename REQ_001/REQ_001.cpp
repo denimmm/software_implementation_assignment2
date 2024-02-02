@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 
-extern "C" int getPerimeter(int, int);
-extern "C" int getArea(int, int);
+extern "C" int getPerimeter(int*, int*);
+extern "C" int getArea(int*, int*);
 extern "C" void setLength(int, int*);
 extern "C" void setWidth(int, int*);
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -14,15 +14,19 @@ namespace REQ001
 	public:
 		
 		TEST_METHOD(getPerimeterTest)
-		{
+		{	
+			int length = 5;
+			int width = 7;
 			int expected = 24;
-			int result = getPerimeter(5, 7);
+			int result = getPerimeter(&length, &width);
 			Assert::AreEqual(expected, result);
 		}
 		TEST_METHOD(getAreaTest)
-		{
+		{	
+			int length = 5;
+			int width = 7;
 			int expected = 35;
-			int result = getArea(5, 7);
+			int result = getArea(&length, &width);
 			Assert::AreEqual(expected, result);
 		}
 	};
@@ -43,7 +47,7 @@ namespace REQ003 //Both the length and width of the rectangle is to be limited t
 		TEST_METHOD(setLengthTestMinimum)
 		{
 			int expected = 0;
-			int result = 0;
+			int result = 4;
 			setLength(expected, &result);
 			Assert::AreNotEqual(expected, result);
 		}
